@@ -45,9 +45,9 @@ const App = () => {
   if (publicToken && (!userAddress || isNaN(userBalance))) {
     return (
       <div className="main-box">
-        <h1>Taquito Boilerplate</h1>
+        <h1>Tezcrow</h1>
         <div id="dialog">
-          <header>Try the Taquito Boilerplate App!</header>
+          <header>The P2P Trading Marketplace</header>
           <div id="content">
             <p className="text-align-center">
               <i className="fas fa-broadcast-tower"></i>&nbsp; Connecting to
@@ -173,7 +173,7 @@ const App = () => {
     return (
       <div className="main-box">
         <div className="title">
-          <h1>Taquito Boilerplate</h1>
+          <h1>Tezcrow</h1>
           <a href="https://app.netlify.com/start/deploy?repository=https://github.com/ecadlabs/taquito-boilerplate">
             <img
               src="https://www.netlify.com/img/deploy/button.svg"
@@ -182,24 +182,15 @@ const App = () => {
           </a>
         </div>
         <div id="dialog">
-          <header>Welcome to Taquito Boilerplate App!</header>
+          <header>Welcome to Tezcrow!</header>
           <div id="content">
-            <p>Hello!</p>
-            <p>
-              This is a template Tezos dApp built using Taquito. It's a starting
-              point for you to hack on and build your own dApp for Tezos.
-              <br />
-              If you have not done so already, go to the{" "}
-              <a
-                href="https://github.com/ecadlabs/taquito-boilerplate"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Taquito boilerplate Github page
-              </a>{" "}
-              and click the <em>"Use this template"</em> button.
-            </p>
-            <p>Go forth and Tezos!</p>
+                <b>The main focus on Tezcrow is to make the overall trading process as simple and user friendly as possible, you need a quick trade. Tezcrow it...</b> 
+                <p>1. Initiator connects their own wallet and selects NFT's they would like to offer</p>
+                <p>2. Initiator searches wallet address and selects NFT's they would like to receive</p>
+                <p>3. Initiator confirms offer resulting in offered NFT's going to escrow wallet</p>
+                <p>4. Receiver connects wallet and views offer</p>
+                <p>5. Receiver confirms offer which automatically sends NFT's to the Initiators wallets and releases Initiator wallets offer from escrow to the receiver</p>  
+            <b>Offers prior to confirmation from both parties can be withdrawn from the escrow wallet by the initiator at any time.</b> 
           </div>
           <ConnectButton
             Tezos={Tezos}
