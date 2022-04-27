@@ -94,7 +94,7 @@ const App = () => {
   } else if (userAddress && !isNaN(userBalance)) {
     return (
       <div className="main-box">
-        <h1>Taquito Boilerplate</h1>
+        <h1>Tezcrow</h1>
         <div id="tabs">
           <div
             id="transfer"
@@ -102,6 +102,13 @@ const App = () => {
             onClick={() => setActiveTab("transfer")}
           >
             Make a transfer
+          </div>
+          <div
+            id="nfts"
+            className={activeTab === "nfts" ? "active" : ""}
+            onClick={() => setActiveTab("nfts")}
+          >
+            See NFTs
           </div>
           <div
             id="contract"
@@ -124,9 +131,7 @@ const App = () => {
               </div>
             ) : (
               <div id="increment-decrement">
-                <h3 className="text-align-center">
-                  Current counter: <span>{storage}</span>
-                </h3>
+                <h3 className="text-align-center">Current counter: <span>{storage}</span></h3>
                 <UpdateContract
                   contract={contract}
                   setUserBalance={setUserBalance}
