@@ -184,13 +184,17 @@ const App = () => {
         <div id="dialog">
           <header>Welcome to Tezcrow!</header>
           <div id="content">
-                <b>The main focus on Tezcrow is to make the overall trading process as simple and user friendly as possible, you need a quick trade. Tezcrow it...</b> 
-                <p>1. Initiator connects their own wallet and selects NFT's they would like to offer</p>
-                <p>2. Initiator searches wallet address and selects NFT's they would like to receive</p>
-                <p>3. Initiator confirms offer resulting in offered NFT's going to escrow wallet</p>
-                <p>4. Receiver connects wallet and views offer</p>
-                <p>5. Receiver confirms offer which automatically sends NFT's to the Initiators wallets and releases Initiator wallets offer from escrow to the receiver</p>  
-            <b>Offers prior to confirmation from both parties can be withdrawn from the escrow wallet by the initiator at any time.</b> 
+                <b>Tezcrow is the easiest and cheapest way to trade Tezos NFTs.</b> 
+                <p>Want an expensive NFT, but don't want to pay huge marketplace fees? Tezcrow it!   
+                   Want to trade a lot of your cheap (undervalued) NFTs for a blue chip NFT? Tezcrow it! 
+                   Want to trade NFTs with a friend? Tezcrow it!</p>
+                <p>1. Initiator connects their wallet.</p>
+                <p>2. Initiator pastes Counterparty's wallet address or searches connected wallets for desired NFTs.</p>
+                <p>3. Initiator selects NFTs they want from Counterparty's wallet and selects NFTs they want to offer to Counterparty.</p>
+                <p>4. Initiator confirms offer! Selected NFTs automatically sent to escrow wallet.</p>
+                <p>5. Counterparty connects wallet and views offer.</p>
+                <p>6. Counterparty confirms offer! NFTs automatically sent to the Initiator's wallet and Counterparty recieves NFTs from escrow.</p>  
+            <b>Prior to confirmation, Initiator can withdraw any offer. NFTs in the escrow wallet will be automatically sent back to Initiator.</b> 
           </div>
           <ConnectButton
             Tezos={Tezos}
