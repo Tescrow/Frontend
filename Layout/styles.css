@@ -1,0 +1,111 @@
+.html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 16px 32px;
+    background-color: rgb(90, 70, 109);
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 100%;
+    text-align: center;
+    font-size: 48px;
+    text-shadow: 2px 2px yellow;
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.circle {
+    background-color: rgb(56, 233, 56);
+    border: 3px solid yellow;
+    padding: 24px;
+    border-radius: 50%;
+}
+
+.tops {
+    display: flex;
+    justify-content: space-between;
+    gap: 23%;
+}
+
+.top {
+    flex: 1;
+}
+
+.top h3 {
+    margin: 0;
+}
+
+.top p {
+    margin: 0;
+    border: 3px solid black;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.bottom {
+    display: flex;
+    gap: 32px;
+    min-height: 450px; 
+}
+
+ .left, .right {
+    flex: 2;
+    margin: 0;
+}
+
+.nfts {
+    width: 100%;
+    border: 3px solid black;
+    border-radius: 8px;
+    min-height: 450px;
+}
+
+.center {
+    margin: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.trade_offer {
+    flex: 1;
+    margin-top: 60px;
+    border: 3px solid black;
+    border-radius: 8px;
+}
+
+.send_offer {
+    margin: 0 32px;
+    border: 3px solid black;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+}
+
+.send_offer:hover {
+    background-color: yellow;
+}
+
+.socials img {
+    width: 32px;
+}
