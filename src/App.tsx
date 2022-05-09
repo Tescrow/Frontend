@@ -6,6 +6,9 @@ import DisconnectButton from "./components/DisconnectWallet";
 import qrcode from "qrcode-generator";
 import UpdateContract from "./components/UpdateContract";
 import Transfers from "./components/Transfers";
+import twitterLogo from "./images/twitter.png";
+import discordLogo from "./images/discord.png";
+
 
 enum BeaconConnection {
   NONE = "",
@@ -93,73 +96,20 @@ const App = () => {
     );
   } else if (userAddress && !isNaN(userBalance)) {
     return (
-      <div className="main-box">
-        <h1>Tezcrow</h1>
-        <div id="tabs">
-          <div
-            id="transfer"
-            className={activeTab === "transfer" ? "active" : ""}
-            onClick={() => setActiveTab("transfer")}
-          >
-            Make a transfer
+      <body>
+        <header>
+          <div className="top_header">
+            <div className="circle"></div>
+            <div className="socials">
+                <img src={discordLogo} alt="discord" />
+                <img src={twitterLogo} alt="twitter" />
+            </div>
           </div>
-          <div
-            id="nfts"
-            className={activeTab === "nfts" ? "active" : ""}
-            onClick={() => setActiveTab("nfts")}
-          >
-            See NFTs
-          </div>
-          <div
-            id="contract"
-            className={activeTab === "contract" ? "active" : ""}
-            onClick={() => setActiveTab("contract")}
-          >
-            Interact with a contract
-          </div>
-        </div>
-        <div id="dialog">
-          <div id="content">
-            {activeTab === "transfer" ? (
-              <div id="transfers">
-                <h3 className="text-align-center">Make a transfer</h3>
-                <Transfers
-                  Tezos={Tezos}
-                  setUserBalance={setUserBalance}
-                  userAddress={userAddress}
-                />
-              </div>
-            ) : (
-              <div id="increment-decrement">
-                <h3 className="text-align-center">Current counter: <span>{storage}</span></h3>
-                <UpdateContract
-                  contract={contract}
-                  setUserBalance={setUserBalance}
-                  Tezos={Tezos}
-                  userAddress={userAddress}
-                  setStorage={setStorage}
-                />
-              </div>
-            )}
-            <p>
-              <i className="far fa-file-code"></i>&nbsp;
-              <a
-                href={`https://better-call.dev/ithaca/${contractAddress}/operations`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {contractAddress}
-              </a>
-            </p>
-            <p>
-              <i className="far fa-address-card"></i>&nbsp; {userAddress}
-            </p>
-            <p>
-              <i className="fas fa-piggy-bank"></i>&nbsp;
-              {(userBalance / 1000000).toLocaleString("en-US")} ꜩ
-            </p>
-          </div>
-          <DisconnectButton
+        <h1 className="logo">tezcrow</h1>
+        </header>
+        
+        <div className="tops">
+            <DisconnectButton
             wallet={wallet}
             setPublicToken={setPublicToken}
             setUserAddress={setUserAddress}
@@ -167,57 +117,135 @@ const App = () => {
             setWallet={setWallet}
             setTezos={setTezos}
             setBeaconConnection={setBeaconConnection}
-          />
+            />
+            <Transfers
+                  Tezos={Tezos}
+                  setUserBalance={setUserBalance}
+                  userAddress={userAddress}
+            />
         </div>
-        <div id="footer">
-          <img src="built-with-taquito.png" alt="Built with Taquito" />
-        </div>
-      </div>
+        
+        <div className="bottom">
+            <div className="left">
+                {/* <h3>Your NFTs</h3> */}
+                <div className="nfts">
+                  <h3>Your NFTs</h3>
+                  <p>
+                    <i className="far fa-address-card"></i>&nbsp; {userAddress}
+                  </p>
+                  <p>
+                  <i className="fas fa-piggy-bank"></i>&nbsp; {userBalance} ꜩ
+                  </p>
+                </div>
+            </div>
+            <div className="center">
+                <div className="trade_offer">
+                  <h4>Make Trade Offer</h4>
+                </div>
+                <div className="send_offer">Send Offer</div>
+            </div>
+            <div className="right">
+                {/* <h3>Their NFTs</h3> */}
+                <div className="nfts">
+                  <h3>Their NFTs</h3>
+                </div>
+            </div>
+        {/* </div>
+          <div id="dialog">
+            <div id="content">
+                  <b>Tezcrow is the easiest and cheapest way to trade Tezos NFTs.</b> 
+                  <p>Want an expensive NFT, but don't want to pay huge marketplace fees? Tezcrow it!</p>   
+                  <p>Want to trade a lot of your cheap (undervalued) NFTs for a blue chip NFT? Tezcrow it!</p>
+                  <p>Want to trade NFTs with a friend? Tezcrow it!</p>
+                  <p>1. Initiator connects their wallet.</p>
+                  <p>2. Initiator pastes Counterparty's wallet address or searches connected wallets for desired NFTs.</p>
+                  <p>3. Initiator selects NFTs they want from Counterparty's wallet and selects NFTs they want to offer to Counterparty.</p>
+                  <p>4. Initiator confirms offer! Selected NFTs automatically sent to escrow wallet.</p>
+                  <p>5. Counterparty connects wallet and views offer.</p>
+                  <p>6. Counterparty confirms offer! NFTs automatically sent to the Initiator's wallet and Counterparty recieves NFTs from escrow.</p>  
+              <b>Prior to confirmation, Initiator can withdraw any offer. NFTs in the escrow wallet will be automatically sent back to Initiator.</b> 
+            </div> */}
+            
+          </div>
+          <div id="footer">
+            <img src="built-with-taquito.png" alt="Built with Taquito" />
+          </div>
+        </body>
     );
   } else if (!publicToken && !userAddress && !userBalance) {
     return (
-      <div className="main-box">
-        <div className="title">
-          <h1>Tezcrow</h1>
-          <a href="https://app.netlify.com/start/deploy?repository=https://github.com/ecadlabs/taquito-boilerplate">
-            <img
-              src="https://www.netlify.com/img/deploy/button.svg"
-              alt="netlify-button"
-            />
-          </a>
-        </div>
-        <div id="dialog">
-          <header>Welcome to Tezcrow!</header>
-          <div id="content">
-                <b>Tezcrow is the easiest and cheapest way to trade Tezos NFTs.</b> 
-                <p>Want an expensive NFT, but don't want to pay huge marketplace fees? Tezcrow it!   
-                   Want to trade a lot of your cheap (undervalued) NFTs for a blue chip NFT? Tezcrow it! 
-                   Want to trade NFTs with a friend? Tezcrow it!</p>
-                <p>1. Initiator connects their wallet.</p>
-                <p>2. Initiator pastes Counterparty's wallet address or searches connected wallets for desired NFTs.</p>
-                <p>3. Initiator selects NFTs they want from Counterparty's wallet and selects NFTs they want to offer to Counterparty.</p>
-                <p>4. Initiator confirms offer! Selected NFTs automatically sent to escrow wallet.</p>
-                <p>5. Counterparty connects wallet and views offer.</p>
-                <p>6. Counterparty confirms offer! NFTs automatically sent to the Initiator's wallet and Counterparty recieves NFTs from escrow.</p>  
-            <b>Prior to confirmation, Initiator can withdraw any offer. NFTs in the escrow wallet will be automatically sent back to Initiator.</b> 
+      <body>
+        <header>
+          <div className="top_header">
+            <div className="circle"></div>
+            <div className="socials">
+                <img src={discordLogo} alt="discord" />
+                <img src={twitterLogo} alt="twitter" />
+            </div>
           </div>
+        <h1 className="logo">tezcrow</h1>
+        </header>
+        
+        <div className="tops">
           <ConnectButton
-            Tezos={Tezos}
-            setContract={setContract}
-            setPublicToken={setPublicToken}
-            setWallet={setWallet}
-            setUserAddress={setUserAddress}
-            setUserBalance={setUserBalance}
-            setStorage={setStorage}
-            contractAddress={contractAddress}
-            setBeaconConnection={setBeaconConnection}
-            wallet={wallet}
-          />
+              Tezos={Tezos}
+              setContract={setContract}
+              setPublicToken={setPublicToken}
+              setWallet={setWallet}
+              setUserAddress={setUserAddress}
+              setUserBalance={setUserBalance}
+              setStorage={setStorage}
+              contractAddress={contractAddress}
+              setBeaconConnection={setBeaconConnection}
+              wallet={wallet}
+            />
+            <Transfers
+                  Tezos={Tezos}
+                  setUserBalance={setUserBalance}
+                  userAddress={userAddress}
+            />
         </div>
-        <div id="footer">
-          <img src="built-with-taquito.png" alt="Built with Taquito" />
-        </div>
-      </div>
+        
+        <div className="bottom">
+            <div className="left">
+                {/* <h3>Your NFTs</h3> */}
+                <div className="nfts">
+                  <h3>Your NFTs</h3>
+                </div>
+            </div>
+            <div className="center">
+                <div className="trade_offer">
+                  <h4>Make Trade Offer</h4>
+                </div>
+                <div className="send_offer">Send Offer</div>
+            </div>
+            <div className="right">
+                {/* <h3>Their NFTs</h3> */}
+                <div className="nfts">
+                  <h3>Their NFTs</h3>
+                </div>
+            </div>
+        {/* </div>
+          <div id="dialog">
+            <div id="content">
+                  <b>Tezcrow is the easiest and cheapest way to trade Tezos NFTs.</b> 
+                  <p>Want an expensive NFT, but don't want to pay huge marketplace fees? Tezcrow it!</p>   
+                  <p>Want to trade a lot of your cheap (undervalued) NFTs for a blue chip NFT? Tezcrow it!</p>
+                  <p>Want to trade NFTs with a friend? Tezcrow it!</p>
+                  <p>1. Initiator connects their wallet.</p>
+                  <p>2. Initiator pastes Counterparty's wallet address or searches connected wallets for desired NFTs.</p>
+                  <p>3. Initiator selects NFTs they want from Counterparty's wallet and selects NFTs they want to offer to Counterparty.</p>
+                  <p>4. Initiator confirms offer! Selected NFTs automatically sent to escrow wallet.</p>
+                  <p>5. Counterparty connects wallet and views offer.</p>
+                  <p>6. Counterparty confirms offer! NFTs automatically sent to the Initiator's wallet and Counterparty recieves NFTs from escrow.</p>  
+              <b>Prior to confirmation, Initiator can withdraw any offer. NFTs in the escrow wallet will be automatically sent back to Initiator.</b> 
+            </div> */}
+            
+          </div>
+          <div id="footer">
+            <img src="built-with-taquito.png" alt="Built with Taquito" />
+          </div>
+        </body>
     );
   } else {
     return <div>An error has occurred</div>;

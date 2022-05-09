@@ -38,19 +38,19 @@ const Transfers = ({
     <div id="transfer-inputs">
       <input
         type="text"
-        placeholder="Recipient"
+        placeholder="Paste Recipient Address"
         value={recipient}
         onChange={e => setRecipient(e.target.value)}
       />
-      <input
+      {/* <input
         type="number"
         placeholder="Amount"
         value={amount}
         onChange={e => setAmount(e.target.value)}
-      />
+      /> */}
       <button
-        className="button"
-        disabled={!recipient && !amount}
+        className="buttonSmall"
+        disabled={!recipient}
         onClick={sendTransfer}
       >
         {loading ? (
@@ -59,7 +59,7 @@ const Transfers = ({
           </span>
         ) : (
           <span>
-            <i className="far fa-paper-plane"></i>&nbsp; Send
+            View
           </span>
         )}
       </button>

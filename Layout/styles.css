@@ -46,6 +46,10 @@ header {
     gap: 23%;
 }
 
+.top p:hover {
+    background-color: yellow;
+}
+
 .top {
     flex: 1;
 }
