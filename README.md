@@ -1,5 +1,7 @@
 Access the whitepaper here - https://tezcroww.gitbook.io/tezcrow-tezos-p2p-trading-platform/jCg8aTGvQohubBtHp6L0/
 
+Access the UI here - https://tezcrow.netlify.app/
+
 # Taquito Boilerplate in React
 
 ![Built with Taquito][logo]
