@@ -53,7 +53,7 @@ const ConnectButton = ({
       await wallet.requestPermissions({
         network: {
           type: NetworkType.ITHACANET,
-          rpcUrl: "https://ithaca.api.tez.ie"
+          rpcUrl: "https://api.ithacanet.tzkt.io/"
         }
       });
       // gets user's address
@@ -62,23 +62,6 @@ const ConnectButton = ({
       setBeaconConnection(true);
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const connectNano = async (): Promise<void> => {
-    try {
-      setLoadingNano(true);
-      const transport = await TransportU2F.create();
-      const ledgerSigner = new LedgerSigner(transport, "44'/1729'/0'/0'", true);
-
-      Tezos.setSignerProvider(ledgerSigner);
-
-      //Get the public key and the public key hash from the Ledger
-      const userAddress = await Tezos.signer.publicKeyHash();
-      await setup(userAddress);
-    } catch (error) {
-      console.log("Error!", error);
-      setLoadingNano(false);
     }
   };
 

@@ -4,7 +4,7 @@ import { TezosToolkit } from "@taquito/taquito";
 const Transfers = ({
   Tezos,
   setUserBalance,
-  userAddress
+  userAddress,
 }: {
   Tezos: TezosToolkit;
   setUserBalance: Dispatch<SetStateAction<number>>;
@@ -15,13 +15,13 @@ const Transfers = ({
   const [loading, setLoading] = useState<boolean>(false);
 
   const sendTransfer = async (): Promise<void> => {
-    if (recipient && amount) {
+    if (recipient) {
       setLoading(true);
       try {
-        const op = await Tezos.wallet
-          .transfer({ to: recipient, amount: parseInt(amount) })
-          .send();
-        await op.confirmation();
+        // const op = await Tezos.wallet
+        //   .transfer({ to: recipient, amount: parseInt(amount) })
+        //   .send();
+        // await op.confirmation();
         setRecipient("");
         setAmount("");
         const balance = await Tezos.tz.getBalance(userAddress);
@@ -30,6 +30,7 @@ const Transfers = ({
         console.log(error);
       } finally {
         setLoading(false);
+        console.log(recipient);
       }
     }
   };
@@ -59,7 +60,7 @@ const Transfers = ({
           </span>
         ) : (
           <span>
-            View
+            Load
           </span>
         )}
       </button>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component, useEffect } from "react";
 import { TezosToolkit } from "@taquito/taquito";
 import "./App.css";
 import ConnectButton from "./components/ConnectWallet";
@@ -8,6 +8,12 @@ import UpdateContract from "./components/UpdateContract";
 import Transfers from "./components/Transfers";
 import twitterLogo from "./images/twitter.png";
 import discordLogo from "./images/discord.png";
+import DegenFox3763 from "./images/DegenFox3763.png";
+import NFTContainerLeft from "./components/NFTContainerLeft";
+import NFTContainerRight from "./components/NFTContainerRight";
+import NFTContainerCenter from "./components/NFTContainerCenter";
+
+
 
 
 enum BeaconConnection {
@@ -20,7 +26,7 @@ enum BeaconConnection {
 
 const App = () => {
   const [Tezos, setTezos] = useState<TezosToolkit>(
-    new TezosToolkit("https://ithaca.api.tez.ie")
+    new TezosToolkit("https://api.ithacanet.tzkt.io/")
   );
   const [contract, setContract] = useState<any>(undefined);
   const [publicToken, setPublicToken] = useState<string | null>("");
@@ -31,6 +37,8 @@ const App = () => {
   const [copiedPublicToken, setCopiedPublicToken] = useState<boolean>(false);
   const [beaconConnection, setBeaconConnection] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("transfer");
+  const [recipient, setRecipient] = useState<string>("");
+
 
   // Granadanet Increment/Decrement contract
   // const contractAddress: string = "KT1K3XVNzsmur7VRgY8CAHPUENaErzzEpe4e";
@@ -45,7 +53,7 @@ const App = () => {
     return { __html: qr.createImgTag(4) };
   };
 
-  if (publicToken && (!userAddress || isNaN(userBalance))) {
+  if (publicToken && !recipient && (!userAddress || isNaN(userBalance))) {
     return (
       <div className="main-box">
         <h1>Tezcrow</h1>
@@ -94,12 +102,14 @@ const App = () => {
         </div>
       </div>
     );
-  } else if (userAddress && !isNaN(userBalance)) {
+  } else if (userAddress && !recipient) {
+    console.log(recipient);
+
     return (
       <body>
         <header>
           <div className="top_header">
-            <div className="circle"></div>
+            <div className="circleConnect"></div>
             <div className="socials">
                 <img src={discordLogo} alt="discord" />
                 <img src={twitterLogo} alt="twitter" />
@@ -129,50 +139,57 @@ const App = () => {
             <div className="left">
                 {/* <h3>Your NFTs</h3> */}
                 <div className="nfts">
-                  <h3>Your NFTs</h3>
-                  <p>
-                    <i className="far fa-address-card"></i>&nbsp; {userAddress}
-                  </p>
-                  <p>
-                  <i className="fas fa-piggy-bank"></i>&nbsp; {userBalance} ꜩ
-                  </p>
+                  <h3>Your NFTs {userAddress}</h3>
+                  <NFTContainerLeft />
                 </div>
             </div>
             <div className="center">
                 <div className="trade_offer">
-                  <h4>Make Trade Offer</h4>
+                  <div id="tabs">
+                    <div
+                      id="trade"
+                      className={activeTab === "trade" ? "active" : ""}
+                      onClick={() => setActiveTab("trade")}
+                    >
+                      <h4>Show Trade Offer</h4>
+                    </div>
+                  </div>
+                  <div className="nfts3">
+                    {activeTab === "trade" ? (
+                    <NFTContainerCenter />
+                  ) : (
+                    <div id="trade" />
+                  )}
                 </div>
-                <div className="send_offer">Send Offer</div>
+              <div className="send_offer">Send Offer</div>
+              </div>
             </div>
             <div className="right">
-                {/* <h3>Their NFTs</h3> */}
                 <div className="nfts">
-                  <h3>Their NFTs</h3>
+                  <div id="tabs">
+                  <div
+                    id="nfts"
+                    className={activeTab === "nfts" ? "active" : ""}
+                    onClick={() => setActiveTab("nfts")}
+                  >
+                    <h3>View Their NFTs</h3>
+                  </div>
                 </div>
+                <div className="nfts2">
+                    {activeTab === "transfer" ? (
+                    <div id="transfers" />
+                ) : (
+                  <NFTContainerRight />  
+                )}
+                </div>
+              </div>
             </div>
-        {/* </div>
-          <div id="dialog">
-            <div id="content">
-                  <b>Tezcrow is the easiest and cheapest way to trade Tezos NFTs.</b> 
-                  <p>Want an expensive NFT, but don't want to pay huge marketplace fees? Tezcrow it!</p>   
-                  <p>Want to trade a lot of your cheap (undervalued) NFTs for a blue chip NFT? Tezcrow it!</p>
-                  <p>Want to trade NFTs with a friend? Tezcrow it!</p>
-                  <p>1. Initiator connects their wallet.</p>
-                  <p>2. Initiator pastes Counterparty's wallet address or searches connected wallets for desired NFTs.</p>
-                  <p>3. Initiator selects NFTs they want from Counterparty's wallet and selects NFTs they want to offer to Counterparty.</p>
-                  <p>4. Initiator confirms offer! Selected NFTs automatically sent to escrow wallet.</p>
-                  <p>5. Counterparty connects wallet and views offer.</p>
-                  <p>6. Counterparty confirms offer! NFTs automatically sent to the Initiator's wallet and Counterparty recieves NFTs from escrow.</p>  
-              <b>Prior to confirmation, Initiator can withdraw any offer. NFTs in the escrow wallet will be automatically sent back to Initiator.</b> 
-            </div> */}
-            
           </div>
           <div id="footer">
-            <img src="built-with-taquito.png" alt="Built with Taquito" />
-          </div>
-        </body>
+        </div>
+      </body>
     );
-  } else if (!publicToken && !userAddress && !userBalance) {
+  } else if (!publicToken && !userAddress && !recipient) {
     return (
       <body>
         <header>
@@ -243,7 +260,6 @@ const App = () => {
             
           </div>
           <div id="footer">
-            <img src="built-with-taquito.png" alt="Built with Taquito" />
           </div>
         </body>
     );
